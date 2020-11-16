@@ -25,7 +25,7 @@ SECRET_KEY = 'u7lm@zq0bwme&41ofc&bz%^x_^_y!oiwil=^=a)=dal+-s^!(p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "telegrammarket.herokuapp.com/"]
 
 
 # Application definition
