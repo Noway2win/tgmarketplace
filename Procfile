@@ -1,1 +1,1 @@
-web: pipenv run python tgmarket/manage.py runserver $PORT
+web: pipenv run python tgmarket/manage.py runserver 0.0.0.0:PORT
