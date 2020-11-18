@@ -1,0 +1,19 @@
+default:
+  SECRET_KEY: ""
+  DEBUG: true
+  ALLOWED_HOSTS: []
+  DATABASE_URL: ""
+
+development:
+  DEBUG: true
+  ALLOWED_HOSTS:
+    - localhost
+    - 127.0.0.1
+
+heroku:
+  DEBUG: false
+  ALLOWED_HOSTS:
+    - localhost
+    - 127.0.0.1
+    - telegrammarket.herokuapp.com
+  VENV_SYNTHETIC: true
