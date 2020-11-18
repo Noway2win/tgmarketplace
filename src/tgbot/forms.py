@@ -12,7 +12,6 @@ class ProfileForm(forms.ModelForm):
             "purchase",
             "product",
             "extra_message",
-
         )
         widgets = {
             "name": forms.TextInput,

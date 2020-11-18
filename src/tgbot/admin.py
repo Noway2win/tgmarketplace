@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Profile
 from .forms import ProfileForm
 from .models import Product
+
 # Register your models here.
 
 
@@ -13,4 +14,9 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class productAdmin(admin.ModelAdmin):
-    list_display = ("product_type", "product_name", "product_price", "product_description")
+    list_display = (
+        "product_type",
+        "product_name",
+        "product_price",
+        "product_description",
+    )
