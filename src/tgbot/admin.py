@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import Profile
+from .models import Profile, Product
 from .forms import ProfileForm
-from .models import Product
 
 # Register your models here.
 
@@ -13,10 +12,14 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 @admin.register(Product)
-class productAdmin(admin.ModelAdmin):
+class ProductAdmin(admin.ModelAdmin):
     list_display = (
         "product_type",
         "product_name",
         "product_price",
         "product_description",
     )
+    list_filter = ("product_type",)
+    search_fields = ("product_name",)
+
+

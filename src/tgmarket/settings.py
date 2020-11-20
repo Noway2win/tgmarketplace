@@ -18,6 +18,7 @@ import dj_database_url
 from dynaconf.default_settings import ENV_FOR_DYNACONF
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+PROJECT_DIR = BASE_DIR / "tgmarket"
 
 
 # Quick-start development settings - unsuitable for production
@@ -122,6 +123,12 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
+STATICFILES_DIRS = [
+    PROJECT_DIR / "static",
+]
+STATIC_ROOT = BASE_DIR / ".static"
+if not DEBUG:
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Read more at https://dynaconf.readthedocs.io/en/latest/guides/django.html
 import dynaconf  # noqa
 
