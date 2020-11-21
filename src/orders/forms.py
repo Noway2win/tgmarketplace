@@ -1,6 +1,6 @@
 from django import forms
 
-from orders.models import Order
+from orders.models import Order, ProductOrder
 
 
 class OrderForm(forms.ModelForm):
@@ -13,3 +13,8 @@ class OrderForm(forms.ModelForm):
             "is_active",
         )
 
+
+class ProductOrderForm(forms.ModelForm):
+    class Meta:
+        model = ProductOrder
+        fields = ("order", "product")

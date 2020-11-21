@@ -6,6 +6,7 @@ class Profile(models.Model):
         verbose_name="User number from telegram",
         max_length=13,
         default="00000000000000",
+        unique=True,
     )
     name = models.TextField(verbose_name="User name")
     purchase = models.BooleanField(default=False)

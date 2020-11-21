@@ -9,6 +9,3 @@ from .forms import ProfileForm
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ("phone_number", "name", "purchase", "product", "extra_message")
     form = ProfileForm
-
-
-

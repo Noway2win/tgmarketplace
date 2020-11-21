@@ -4,3 +4,4 @@
 .static
 /src/prod_images
 .migrations.*
+/src/prod_images/

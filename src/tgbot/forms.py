@@ -16,4 +16,3 @@ class ProfileForm(forms.ModelForm):
         widgets = {
             "name": forms.TextInput,
         }
-
