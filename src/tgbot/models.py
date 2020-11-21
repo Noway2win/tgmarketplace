@@ -15,11 +15,11 @@ class Profile(models.Model):
     )
 
 
-class Product(models.Model):
-    product_type = models.TextField(verbose_name="type of product")
-    product_name = models.TextField(verbose_name="name of product")
-    # product_image = models.ImageField(verbose_name="image of product")
-    product_price = models.PositiveIntegerField(verbose_name="price of product")
-    product_description = models.TextField(
-        verbose_name="description of product", blank=True
-    )
+# class Product(models.Model):
+#     product_type = models.TextField(verbose_name="type of product")
+#     product_name = models.TextField(verbose_name="name of product")
+#     # product_image = models.ImageField(verbose_name="image of product")
+#     product_price = models.PositiveIntegerField(verbose_name="price of product")
+#     product_description = models.TextField(
+#         verbose_name="description of product", blank=True
+#     )

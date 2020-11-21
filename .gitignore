@@ -2,3 +2,4 @@
 /src/db.sqlite3
 .secrets.*
 .static
+/src/prod_images
