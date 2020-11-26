@@ -129,6 +129,11 @@ STATICFILES_DIRS = [
     PROJECT_DIR / "static",
 ]
 STATIC_ROOT = BASE_DIR / ".static"
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")
+
 if not DEBUG:
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Read more at https://dynaconf.readthedocs.io/en/latest/guides/django.html

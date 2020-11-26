@@ -1,9 +1,9 @@
 from django.shortcuts import render
+
+from products.models import Product, ProductImage
 from .forms import ProfileForm
 
 
 def index(request):
-    form = ProfileForm(request.POST or None)
-    if request.method == "POST" and form.is_valid():
-        new_form = form.save()
+    products_images = ProductImage.objects.filter(is_active=True, is_main=True)
     return render(request, "tgbot/index.html", locals())

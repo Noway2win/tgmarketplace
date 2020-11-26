@@ -1,31 +1,65 @@
 {% extends "__base.html" %}
+{% load static %}
 
-{% block title %}Index{% endblock %}
+{% block title %}HomePage{% endblock %}
 
 {% block body %}
-<div>
-<form action="" method="post">
-    {% csrf_token %}
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Ваш номер телефона</label>
-        <input type="text" name="form.phone_number.name" class="form-control">
+    <div class="section">
+        <a name="pictures"></a>
+    <H1 align="center">Pictures</H1>
+        <div class="container">
+  <div class="row">
+    {% for product in products_images %}
+        {% if product.product.product_type == "P" %}
+        <div class="col-sm-4">
+        <div class="product-item">
+            <div>
+                <img src="{{ product.image.url }}" class="img-responsive">
+            </div>
+            <h4>{{ product.product.product_name }}</h4>
+            <p>{{ product.product.product_description|truncatechars_html:20 }}</p>
+            <div>
+                <p>{{ product.product.product_price }} USD</p>
+            </div>
+
+            <div class="product-button">
+                <button class="btn btn-success">
+                    Оформить заказ
+                </button>
+            </div>
+        </div>
     </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Ваше имя</label>
-        <input type="text" name="form.name.name" class="form-control">
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Покупка совершена?</label>
-        {{ form.purchase }}
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Комментарий</label>
-        <input type="text" name="form.extra_message.name" class="form-control">
-    </div>
-    <div class="form-group row">
-    <div class="col-sm-12">
-      <button type="submit" class="btn btn-primary">Sign in</button>
-    </div>
+        {% endif %}
+    {% endfor %}
   </div>
-    </form>
-    </div>{% endblock %}
+</div>
+    <div class="section">
+    <a name="logos"></a>
+     <H1 align="center">Logos</H1>
+        <div class="container">
+  <div class="row">
+    {% for product in products_images %}
+        {% if product.product.product_type == "L" %}
+        <div class="col-sm-4">
+        <div class="product-item">
+            <div>
+                <img src="{{ product.image.url }}" class="img-responsive">
+            </div>
+            <h4>{{ product.product.product_name }}</h4>
+             <p>{{ product.product.product_description|truncatechars_html:20 }}</p>
+            <div>
+                <p>{{ product.product.product_price }} USD</p>
+            </div>
+            <div class="product-button">
+                <button class="btn btn-success">
+                    Оформить заказ
+                </button>
+            </div>
+        </div>
+    </div>
+        {% endif %}
+    {% endfor %}
+  </div>
+</div>
+    </div>
+{% endblock %}

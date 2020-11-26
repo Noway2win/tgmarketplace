@@ -21,6 +21,7 @@ class Order(models.Model):
         null=True,
         default=None,
     )
+
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
     is_active = models.BooleanField(default=True)
@@ -39,9 +40,17 @@ class ProductOrder(models.Model):
     )
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
-
+    price = models.DecimalField(
+        default=0, verbose_name="price in order", max_digits=5, decimal_places=2
+    )
     is_active = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = "ProductOrder"
         verbose_name_plural = "ProductOrders"
+
+    def save(self, *args, **kwargs):
+        product_price = self.product.product_price
+        self.price = product_price  # * self.
+        self.price.save(force_update=True)
+        super(ProductOrder, self).save(*args, **kwargs)

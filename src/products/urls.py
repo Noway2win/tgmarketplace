@@ -1,5 +1,5 @@
 from django.urls import path
 
-from tgbot import views
+from products import views
 
-urlpatterns = [path("", views.index, name="index")]
+urlpatterns = [path("home", views.home, name="home")]

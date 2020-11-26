@@ -1,13 +1,19 @@
+from PIL import Image
 from django.db import models
 
 # Create your models here.
 
 
 class Product(models.Model):
-    product_type = models.TextField(verbose_name="type of product")
+    class Prod_Type(models.TextChoices):
+        Pictures = "P"
+        Logos = "L"
+
+    product_type = models.TextField(
+        choices=Prod_Type.choices, verbose_name="type of product"
+    )
     product_name = models.TextField(verbose_name="name of product", unique=True)
     is_active = models.BooleanField(default=True)
-    # product_image = models.ImageField(verbose_name="image of product")
     product_price = models.PositiveIntegerField(verbose_name="price of product")
     product_description = models.TextField(
         verbose_name="description of product", blank=True
@@ -32,6 +38,7 @@ class ProductImage(models.Model):
         Product, blank=True, null=True, default=None, on_delete=models.CASCADE
     )
     image = models.ImageField(upload_to="prod_images/")
+    is_main = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
@@ -39,3 +46,12 @@ class ProductImage(models.Model):
     class Meta:
         verbose_name = "Photo"
         verbose_name_plural = "Photos"
+
+    def save(self):
+        super().save()
+        img = Image.open(self.image.path)
+
+        if img.height > 100 or img.width > 100:
+            output_size = (100, 100)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
