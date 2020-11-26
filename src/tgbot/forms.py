@@ -9,7 +9,6 @@ class ProfileForm(forms.ModelForm):
         fields = (
             "phone_number",
             "name",
-            "purchase",
             "product",
             "extra_message",
         )

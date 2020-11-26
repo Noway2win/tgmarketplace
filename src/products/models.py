@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 from django.urls import reverse_lazy
-
+from tgbot import TgbotConfig
 
 class Product(models.Model):
     class Prod_Type(models.TextChoices):
@@ -57,5 +57,5 @@ class ProductImage(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
-    # def get_absolute_url(self):
-    #     return reverse_lazy("tgbot:product", kwargs={"pk": self.pk})
+    def get_absolute_url(self):
+        return reverse_lazy("products:product", kwargs={"pk": self.pk})

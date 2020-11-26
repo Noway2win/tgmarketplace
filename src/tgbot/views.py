@@ -9,10 +9,10 @@ from .forms import ProfileForm
 #     return render(request, "tgbot/index.html", locals())
 
 
-class IndexView(ListView):
-    queryset = ProductImage.objects.filter(is_active=True, is_main=True)
-    template_name = "tgbot/index.html"
-
-
-class detailed_prod(DetailView):
-    model = Product
+# class IndexView(ListView):
+#     queryset = ProductImage.objects.filter(is_active=True, is_main=True)
+#     template_name = "tgbot/index.html"
+#
+#
+# class detailed_prod(DetailView):
+#     model = Product
