@@ -2,6 +2,7 @@ from PIL import Image
 from django.db import models
 
 # Create your models here.
+from django.urls import reverse_lazy
 
 
 class Product(models.Model):
@@ -55,3 +56,6 @@ class ProductImage(models.Model):
             output_size = (100, 100)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+    # def get_absolute_url(self):
+    #     return reverse_lazy("tgbot:product", kwargs={"pk": self.pk})
