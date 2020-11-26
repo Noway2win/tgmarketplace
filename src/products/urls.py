@@ -1,5 +1,11 @@
 from django.urls import path
 
 from products import views
+from products.apps import ProductsConfig
 
-urlpatterns = [path("home", views.home, name="home")]
+app_name = ProductsConfig.label
+
+urlpatterns = [
+    path("", views.IndexView.as_view(), name="index"),
+    path("<int:pk>/", views.Detailed_Prod.as_view(), name="product"),
+]

@@ -9,21 +9,21 @@
     <H1 align="center">Pictures</H1>
         <div class="container">
   <div class="row">
-    {% for product in products_images %}
-        {% if product.product.product_type == "P" %}
+    {% for obj in object_list %}
+        {% if obj.product.product_type == "P" %}
         <div class="col-sm-4">
         <div class="product-item">
             <div>
-                <img src="{{ product.image.url }}" class="img-responsive">
+                <img src="{{ obj.image.url }}" class="img-responsive">
             </div>
-            <h4>{{ product.product.product_name }}</h4>
-            <p>{{ product.product.product_description|truncatechars_html:20 }}</p>
+            <h4><a href="{{ obj.get_absolute_url }}">{{ obj.product.product_name }}</a></h4>
+            <p>{{ obj.product.product_description|truncatechars_html:20 }}</p>
             <div>
-                <p>{{ product.product.product_price }} USD</p>
+                <p>{{ obj.product.product_price }} USD</p>
             </div>
 
             <div class="product-button">
-                <button class="btn btn-success">
+                <button class="btn btn-success" >
                     Оформить заказ
                 </button>
             </div>
@@ -38,17 +38,17 @@
      <H1 align="center">Logos</H1>
         <div class="container">
   <div class="row">
-    {% for product in products_images %}
-        {% if product.product.product_type == "L" %}
+    {% for obj in object_list %}
+        {% if obj.product.product_type == "L" %}
         <div class="col-sm-4">
         <div class="product-item">
             <div>
-                <img src="{{ product.image.url }}" class="img-responsive">
+                <img src="{{ obj.image.url }}" class="img-responsive">
             </div>
-            <h4>{{ product.product.product_name }}</h4>
-             <p>{{ product.product.product_description|truncatechars_html:20 }}</p>
+            <h4>{{ obj.product.product_name }}</h4>
+             <p>{{ obj.product.product_description|truncatechars_html:20 }}</p>
             <div>
-                <p>{{ product.product.product_price }} USD</p>
+                <p>{{ obj.product.product_price }} USD</p>
             </div>
             <div class="product-button">
                 <button class="btn btn-success">
