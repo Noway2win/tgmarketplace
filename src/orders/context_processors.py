@@ -15,6 +15,7 @@ def basket_info_func(request):
         else:
             total_nmb = 0
     except:
+        basket_products = None
         total_nmb = 0
 
     return locals()
