@@ -16,4 +16,5 @@ heroku:
     - localhost
     - 127.0.0.1
     - telegrammarket.herokuapp.com
+    - 'telegrammarket.herokuapp.com'
   VENV_SYNTHETIC: true
