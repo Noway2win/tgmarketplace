@@ -57,9 +57,11 @@ def confirmation(request):
                 data=request.POST
                 phone = data.get('phone')
                 name = data.get('name')
+                message = data.get('message')
+                address=data.get('address')
                 user, created = User.objects.get_or_create(username=phone, defaults={'first_name': name})
 
-                order = Order.objects.create(user=user, customer_name=name, phone=phone)
+                order = Order.objects.create(user=user, customer_name=name, phone=phone, extra_message=message, customer_address=address)
 
                 for name, value in data.items():
                     if name.startswith("product_in_basket_"):

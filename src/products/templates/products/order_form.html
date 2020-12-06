@@ -27,6 +27,23 @@
                                    value="{{ request.POST.phone }}">
                         </div>
                     </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <label>Your address</label>
+                            <span class="badge badge-pill badge-danger">{{ form.address.errors }}</span>
+                            <input type="text" name="{{ form.address.html_name }}" class="form-control"
+                                   value="{{ request.POST.address }}">
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <label>Some extra message</label>
+                            <span class="badge badge-pill badge-danger">{{ form.message.errors }}</span>
+                            <input type="text" name="{{ form.message.html_name }}" class="form-control"
+                                   value="{{ request.POST.message }}">
+                        </div>
+                    </div>
+
                     <ul class="list-group">
                         {% for product in products_in_basket %}
                             <li class="list-group-item d-flex justify-content-between align-items-center">
