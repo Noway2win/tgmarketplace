@@ -1,6 +1,9 @@
+from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render
-from .models import ProductBasket
+
+from .forms import ConfirmationForm
+from .models import ProductBasket, ProductOrder, Order
 
 
 def basket_add(request):
@@ -30,6 +33,7 @@ def basket_add(request):
         product_dict["name"] = item.product.product_name
         product_dict["price"] = item.product.product_price
         return_dict["products"].append(product_dict)
+        print(return_dict)
     return JsonResponse(return_dict)
 
 def confirmation(request):
@@ -41,4 +45,26 @@ def confirmation(request):
         product_prices.append(item.product.product_price)
 
     total_price = sum(product_prices)
+    form = ConfirmationForm(request.POST or None)
+    if request.POST:
+        print(request.POST)
+        if form.is_valid():
+            print('ok')
+            data=request.POST
+            phone = data.get('phone')
+            name = data.get('name')
+            user, created = User.objects.get_or_create(username=phone, defaults={'first_name': name})
+
+            order = Order.objects.create(user=user, customer_name=name, phone=phone)
+
+            for name, value in data.items():
+                if name.startswith("product_in_basket_"):
+                    basket_prod_id=name.split("product_in_basket_")[1]
+                    basket_product = ProductBasket.objects.get(id=basket_prod_id)
+                    product = basket_product.product
+                    ProductOrder.objects.create(product=product, price=ProductBasket.price, order=order)
+
+
+        else:
+            print('no')
     return render(request, 'products/order_form.html', locals())

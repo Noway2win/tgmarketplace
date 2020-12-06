@@ -28,7 +28,7 @@
         <div class="wrapper-content">
         {% block body %}{% endblock %}
      {% include 'footer.html' %}
-
+            <form id="buying_form" class="form-inline hidden" action="{% url "products:basket" %}">{% csrf_token %}</form>
 
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

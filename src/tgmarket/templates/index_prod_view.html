@@ -1,0 +1,12 @@
+ <div class="col-sm-4">
+                                <div class="product-item">
+                                    <div>
+                                        <img src="{{ obj.image.url }}" class="img-responsive">
+                                    </div>
+                                    <h4><a href="{{ obj.get_absolute_url }}">{{ obj.product.product_name }}</a></h4>
+                                    <p>{{ obj.product.product_description|truncatechars_html:20 }}</p>
+                                    <div>
+                                        <p>{{ obj.product.product_price }} USD</p>
+                                    </div>
+                                </div>
+                            </div>
