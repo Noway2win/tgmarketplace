@@ -24,6 +24,7 @@ class ProductOrderAdmin(admin.ModelAdmin):
     class Meta:
         model = ProductOrder
 
+
 @admin.register(ProductBasket)
 class ProductBasketAdmin(admin.ModelAdmin):
     list_display = [field.name for field in ProductBasket._meta.fields]

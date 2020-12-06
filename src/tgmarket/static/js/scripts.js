@@ -23,15 +23,15 @@ $(document).ready(function () {
             success: function (data) {
                 console.log("OK");
                 console.log(data.total_nmb);
-                if (data.total_nmb) {
-                    $('#basket_total_nmb').text("(" + data.total_nmb + ")");
-                    console.log(data.products);
-                    $('.basket-items ul').html("");
-                    $.each(data.products, function (k, v) {
-                        $('.basket-items ul').append('<li>' + v.name + ',' + v.price + ' ' +
-                            'Byn ' + '&nbsp;&nbsp;&nbsp;&nbsp;' + '&nbsp;&nbsp;&nbsp;&nbsp;' +
-                            ''+ '</li>');
-                    })
+                if (data.total_nmb || data.total_nmb == 0) {
+                        $('#basket_total_nmb').text("(" + data.total_nmb + ")");
+                        console.log(data.products);
+                        $('.basket-items ul').html("");
+                        $.each(data.products, function (k, v) {
+                            $('.basket-items ul').append('<li>' + v.name + ',' + v.price + ' ' +
+                                'Byn ' + '&nbsp;&nbsp;&nbsp;&nbsp;' + '&nbsp;&nbsp;&nbsp;&nbsp;' +
+                                '<a class="delete-item" href="" data-product_id="' + v.id + '">x</a>' + '</li>');
+                        })
                 }
             },
             error: function () {
@@ -75,6 +75,8 @@ $(document).ready(function () {
     $(document).on('click', '.delete-item', function (e) {
         e.preventDefault();
         $(this).closest('li').remove();
+        product_id = $(this).data('product_id')
+        basketUpdating(product_id, is_delete = true)
     })
 
 

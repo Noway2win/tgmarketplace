@@ -51,12 +51,13 @@ class ProductOrder(models.Model):
 
     def save(self, *args, **kwargs):
         product_price = self.product.product_price
-        self.price = product_price # * self.
+        self.price = product_price  # * self.
         # self.price.save(force_update=True)
         super(ProductOrder, self).save(*args, **kwargs)
 
+
 class ProductBasket(models.Model):
-    session_key= models.CharField(max_length=128, default=None)
+    session_key = models.CharField(max_length=128, default=None)
     order = models.ForeignKey(
         Order, blank=True, null=True, default=None, on_delete=models.CASCADE
     )
@@ -72,12 +73,13 @@ class ProductBasket(models.Model):
 
     def __str__(self):
         return "%s" % self.product.product_name
+
     class Meta:
         verbose_name = "ProductInBasket"
         verbose_name_plural = "ProductInBasket"
 
     def save(self, *args, **kwargs):
         product_price = self.product.product_price
-        self.price = product_price # * self.
+        self.price = product_price  # * self.
         # self.price.save(force_update=True)
         super(ProductBasket, self).save(*args, **kwargs)

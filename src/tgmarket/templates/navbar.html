@@ -15,13 +15,13 @@
                 <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="#">Features</a>
                 <a class="nav-item nav-link" href="#">Pricing</a>
-                <a class="nav-item nav-link disabled" href="#">Disabled</a>
+                <a class="nav-item nav-link" href="/confirmation/">Confirm order</a>
             </div>
         </div>
         <ul class="nav navbar-nav navbar-right">
             <li>
                 <div class="basket-container">
-                    <a href="">Корзина <span id="basket_total_nmb">
+                    <a href="">Order<span id="basket_total_nmb">
                         {% if total_nmb %}
                             ({{ total_nmb }})
                             {% else %}
@@ -31,7 +31,10 @@
                     <div class="basket-items d-none">
                         <ul class="">
                             {% for product in basket_products %}
-                                <li>{{ product.product.product_name }} {{ product.product.product_price }} BYN</li>
+                                <li>{{ product.product.product_name }}
+                                    {{ product.product.product_price }} BYN
+                                    <a class="delete-item" href="" data-product_id="{{ product.id }}">  x</a>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>

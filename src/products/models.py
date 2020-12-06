@@ -5,6 +5,7 @@ from django.db import models
 from django.urls import reverse_lazy
 from tgbot import TgbotConfig
 
+
 class Product(models.Model):
     class Prod_Type(models.TextChoices):
         Pictures = "P"
@@ -15,7 +16,9 @@ class Product(models.Model):
     )
     product_name = models.TextField(verbose_name="name of product", unique=True)
     is_active = models.BooleanField(default=True)
-    product_price = models.DecimalField(verbose_name="price of product", max_digits=5, decimal_places=2)
+    product_price = models.DecimalField(
+        verbose_name="price of product", max_digits=5, decimal_places=2
+    )
     product_description = models.TextField(
         verbose_name="description of product", blank=True
     )
