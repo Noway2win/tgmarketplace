@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from orders.forms import OrderForm
-from orders.models import Order, ProductOrder
+from orders.models import Order, ProductOrder, ProductBasket
 
 
 class ProductOrderInline(admin.TabularInline):
@@ -23,3 +23,10 @@ class ProductOrderAdmin(admin.ModelAdmin):
 
     class Meta:
         model = ProductOrder
+
+@admin.register(ProductBasket)
+class ProductBasketAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in ProductBasket._meta.fields]
+
+    class Meta:
+        model = ProductBasket

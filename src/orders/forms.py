@@ -10,7 +10,7 @@ class OrderForm(forms.ModelForm):
             "customer_name",
             "phone_number",
             "extra_message",
-            "is_active",
+            "customer_address",
         )
 
 

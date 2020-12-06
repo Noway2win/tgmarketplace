@@ -1,5 +1,7 @@
 from django.urls import path
 
-from tgbot import views
+from orders.apps import OrdersConfig
+from orders.views import basket_add
 
-# urlpatterns = [path("", views.index, name="order_index")]
+app_name = OrdersConfig.name
+

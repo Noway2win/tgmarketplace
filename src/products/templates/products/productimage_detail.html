@@ -1,0 +1,30 @@
+{% extends "__base.html" %}
+{% load static %}
+{% block title %}{{ object.product.product_name }}{% endblock %}
+{% block body %}
+    <div class="col-sm-12">
+        <div class="product-item-detailed">
+            <div>
+                <img src="{{ object.image.url }}" class="img-responsive">
+            </div>
+            <h4><a href="{{ object.get_absolute_url }}">{{ object.product.product_name }}</a></h4>
+            <p>{{ object.product.product_description }}</p>
+            <div>
+                <p>{{ object.product.product_price }} USD</p>
+            </div>
+            <div>
+                <form id="buying_form" class="form-inline" action="{% url "products:basket" %}">{% csrf_token %}
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-buy" id="submit_button"
+                                data-product_id="{{ object.product.id }}"
+                                data-product_name="{{ object.product.product_name }}"
+                                data-product_price="{{ object.product.product_price }}">
+                            Купить
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

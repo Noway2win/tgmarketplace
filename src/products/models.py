@@ -15,7 +15,7 @@ class Product(models.Model):
     )
     product_name = models.TextField(verbose_name="name of product", unique=True)
     is_active = models.BooleanField(default=True)
-    product_price = models.PositiveIntegerField(verbose_name="price of product")
+    product_price = models.DecimalField(verbose_name="price of product", max_digits=5, decimal_places=2)
     product_description = models.TextField(
         verbose_name="description of product", blank=True
     )
