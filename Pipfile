@@ -11,6 +11,8 @@ dj-database-url = "*"
 psycopg2 = "*"
 pillow = "*"
 whitenoise = "*"
+gunicorn = "*"
+django-heroku = "*"
 
 [dev-packages]
 black = "==20.8b1"
