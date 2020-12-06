@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 django = "*"
-python-telegram-bot = "*"
 dynaconf = "*"
 dj-database-url = "*"
 psycopg2 = "*"

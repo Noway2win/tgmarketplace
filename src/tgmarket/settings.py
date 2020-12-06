@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+from dynaconf import settings as _ds
+
 import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 import dj_database_url
@@ -25,12 +27,12 @@ PROJECT_DIR = BASE_DIR / "tgmarket"
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ""
+SECRET_KEY = _ds.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = _ds.DEBUG
 
-ALLOWED_HOSTS = ['telegrammarket.herokuapp.com', "localhost", "127.0.0.1", ]
+ALLOWED_HOSTS = _ds.ALLOWED_HOSTS + ['telegrammarket.herokuapp.com', "localhost", "127.0.0.1",]
 
 
 # Application definition
@@ -83,12 +85,10 @@ WSGI_APPLICATION = "tgmarket.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-DATABASE_URL = ""
-db_url = DATABASE_URL
-if ENV_FOR_DYNACONF == "heroku":
-    db_url = os.getenv("DATABASE_URL")
-DATABASES = {"default": {}}
-
+database_url = os.getenv("DATABASE_URL", _ds.DATABASE_URL)
+DATABASES = {
+    "default": dj_database_url.parse(database_url),
+}
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -139,6 +139,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")
 if not DEBUG:
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Read more at https://dynaconf.readthedocs.io/en/latest/guides/django.html
-import dynaconf  # noqa
-settings = dynaconf.DjangoDynaconf(__name__)  # noqa
-# HERE ENDS DYNACONF EXTENSION LOAD (No more code below this line)
+
