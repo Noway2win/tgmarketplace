@@ -9,7 +9,7 @@ def basket_info_func(request):
     basket_products = ProductBasket.objects.filter(
         session_key=session_key, is_active=True
     )
-    if basket_products.count():
+    if basket_products:
         total_nmb = basket_products.count()
     else:
         total_nmb = 0
