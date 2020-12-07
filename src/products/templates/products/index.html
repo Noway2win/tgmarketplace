@@ -1,0 +1,33 @@
+{% extends "__base.html" %}
+{% load static %}
+
+{% block title %}HomePage{% endblock %}
+
+{% block body %}
+    <div class="section">
+        <a name="pictures"></a>
+        <H1 align="center">Pictures</H1>
+        <div class="container">
+            <div class="row">
+                {% for obj in object_list %}
+                    {% if obj.product.product_type == "P" %}
+                        {% include "index_prod_view.html" %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+        <div class="section">
+            <a name="logos"></a>
+            <H1 align="center">Logos</H1>
+            <div class="container">
+                <div class="row">
+                    {% for obj in object_list %}
+                        {% if obj.product.product_type == "L" %}
+                           {% include "index_prod_view.html" %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+            </div>
+        </div>
+{% endblock %}

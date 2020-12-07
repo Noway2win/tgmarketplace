@@ -1,0 +1,23 @@
+.product-item{
+    height: 215px;
+    background: whitesmoke;
+    position: relative;
+    padding: 5px;
+    text-align: center;
+    align-items: center;
+}
+.product-item-detailed{
+       height: 500px;
+    background: whitesmoke;
+    position: relative;
+    padding: 5px;
+    text-align: center;
+    align-items: center;
+}
+.product-button{
+   position: absolute;
+    bottom: 10px;
+    width: 60%;
+    left:20%;
+    right:20%;
+}

@@ -1,5 +1,55 @@
 {% extends "__base.html" %}
+{% load static %}
 
-{% block title %}Index{% endblock %}
+{% block title %}HomePage{% endblock %}
 
-{% block body %}{{ page_place }}<p>{{ system }}</p>{% endblock %}
+{% block body %}
+    <div class="section">
+        <a name="pictures"></a>
+        <H1 align="center">Pictures</H1>
+        <div class="container">
+            <div class="row">
+                {% for obj in object_list %}
+                    {% if obj.product.product_type == "P" %}
+                        <div class="col-sm-4">
+                            <div class="product-item">
+                                <div>
+                                    <img src="{{ obj.image.url }}" class="img-responsive">
+                                </div>
+                                <h4><a href="{{ obj.get_absolute_url }}">{{ obj.product.product_name }}</a></h4>
+                                <p>{{ obj.product.product_description|truncatechars_html:20 }}</p>
+                                <div>
+                                    <p>{{ obj.product.product_price }} USD</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+        <div class="section">
+            <a name="logos"></a>
+            <H1 align="center">Logos</H1>
+            <div class="container">
+                <div class="row">
+                    {% for obj in object_list %}
+                        {% if obj.product.product_type == "L" %}
+                            <div class="col-sm-4">
+                                <div class="product-item">
+                                    <div>
+                                        <img src="{{ obj.image.url }}" class="img-responsive">
+                                    </div>
+                                    <h4><a href="{{ obj.get_absolute_url }}">{{ obj.product.product_name }}</a></h4>
+                                    <p>{{ obj.product.product_description|truncatechars_html:20 }}</p>
+                                    <div>
+                                        <p>{{ obj.product.product_price }} USD</p>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+            </div>
+        </div>
+{% endblock %}

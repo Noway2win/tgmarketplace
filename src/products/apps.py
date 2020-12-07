@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class TgbotConfig(AppConfig):
-    label = "tgbot"
+class ProductsConfig(AppConfig):
+    label = "products"
     name = f"{label}"
