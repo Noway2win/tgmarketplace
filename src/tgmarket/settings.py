@@ -38,6 +38,8 @@ ALLOWED_HOSTS = _ds.ALLOWED_HOSTS + ['telegrammarket.herokuapp.com', "localhost"
 # Application definition
 
 INSTALLED_APPS = [
+    "tgbot.apps.TgbotConfig",
+    # ========================
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -45,7 +47,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # -------------------------------
-    "tgbot.apps.TgbotConfig",
     "products.apps.ProductsConfig",
     "orders.apps.OrdersConfig",
 ]
@@ -80,8 +81,11 @@ TEMPLATES = [
     },
 ]
 
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
 WSGI_APPLICATION = "tgmarket.wsgi.application"
 
+LOGIN_REDIRECT_URL = '/'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -140,3 +144,4 @@ if not DEBUG:
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Read more at https://dynaconf.readthedocs.io/en/latest/guides/django.html
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

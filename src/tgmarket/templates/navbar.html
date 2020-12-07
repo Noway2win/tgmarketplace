@@ -1,8 +1,9 @@
+{% load static %}
 <nav class="navbar fixed-top navbar-light bg-light navigation">
     <a class="navbar-brand" href="#">
-        <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top"
+        <img src="{% static 'img/favicon.ico' %}" width="30" height="30" class="d-inline-block align-top"
              alt="">
-        Bootstrap
+        shop
     </a>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -13,18 +14,18 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#">Features</a>
-                <a class="nav-item nav-link" href="#">Pricing</a>
+                <a class="nav-item nav-link" href="{% url 'update_profile' %}">Update your profile</a>
+                <a class="nav-item nav-link" href="{% url 'order_history' %}">Order history</a>
                 <a class="nav-item nav-link" href="/confirmation/">Confirm order</a>
             </div>
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li>
-                <div class="basket-container">
+            <ul>
+                <ul class="basket-container">
                     <a href="">Order<span id="basket_total_nmb">
                         {% if total_nmb %}
                             ({{ total_nmb }})
-                            {% else %}
+                        {% else %}
                             (0)
                         {% endif %}
                     </span></a>
@@ -33,14 +34,23 @@
                             {% for product in basket_products %}
                                 <li>{{ product.product.product_name }}
                                     {{ product.product.product_price }} BYN
-                                    <a class="delete-item" href="" data-product_id="{{ product.id }}">  x</a>
+                                    <a class="delete-item" href="" data-product_id="{{ product.id }}"> x</a>
                                 </li>
                             {% endfor %}
                         </ul>
                     </div>
-                </div>
-            </li>
+                </ul>
+            </ul>
+                    <div>
+                        {% if user.is_authenticated %}
+                            <li>User: {{ user.get_username }}</li>
+                            <li><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
+                        {% else %}
+                            <li><a href="{% url 'login' %}?next={{ request.path }}">Login </a></li>
+                            <li><a href="{% url 'register' %}">  Register</a></li>
+                        {% endif %}
 
-        </ul>
+                    </div>
+
     </nav>
 </nav>

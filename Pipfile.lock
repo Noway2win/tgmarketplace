@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "81d58117444a85cf94ddd07617c959e401993db8eea39a35052e3de5f37343cc"
+            "sha256": "2eeddf5042af10f4f3c489efe3f8606e8cb1df15dbaf4d79cc73556bd817e471"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -39,6 +39,14 @@
             ],
             "index": "pypi",
             "version": "==3.1.4"
+        },
+        "django-crispy-forms": {
+            "hashes": [
+                "sha256:92ed3fdc52c08d21d60adbb9de24e432c590e66e894f43cee0974fc959209976",
+                "sha256:d3f808d20cafe20fd38a49a47e72db1fd519fcf31bef4f47f008619336a3ebff"
+            ],
+            "index": "pypi",
+            "version": "==1.10.0"
         },
         "django-heroku": {
             "hashes": [

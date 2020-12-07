@@ -7,9 +7,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h3 class="text-center">You order:</h3>
+            {% if  user.profile is None  %}
+                <h3 class="text-center">Thanks for you order, Stranger</h3>
+                {% else %}
+                 <h3 class="text-center">Thanks for you order, {{ user.profile.Name }}</h3>
+            {% endif %}
                 <h5 class="text-center">Total price: {{ total_price }} BYN</h5>
-                <form class="form-horizontal" method="post">{% csrf_token %}
+                <form class="form-horizontal" method="post" action="{% url "products:thanks"%}">{% csrf_token %}
                     <div class="col-lg-5">
                         <div class="form-group">
                             <label>Your name</label>
@@ -29,7 +33,7 @@
                     </div>
                     <div class="col-lg-5">
                         <div class="form-group">
-                            <label>Your address</label>
+                            <label>Delivery address</label>
                             <span class="badge badge-pill badge-danger">{{ form.address.errors }}</span>
                             <input type="text" name="{{ form.address.html_name }}" class="form-control"
                                    value="{{ request.POST.address }}">

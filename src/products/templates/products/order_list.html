@@ -1,0 +1,8 @@
+{% extends "__base.html" %}
+{% block title %}Order History{% endblock %}
+{% block body %}
+    <h1>Order_history</h1>
+                   {% for obj in object_list %}
+                       <p>{{ obj.product.product_name }}</p>
+                   {% endfor %}
+{% endblock %}
