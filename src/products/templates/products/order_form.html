@@ -10,7 +10,7 @@
                  {% if  user.profile is None  %}
                     <h3 class="text-center">Thanks for you order, Stranger</h3>
                 {% elif user.profile.Name is None %}
-                    <h3 class="text-center">Thanks for you order, {{ user.profile.Name }}</h3>
+                    <h3 class="text-center">Thanks for you order, Stranger</h3>
                  {% else %}
                     <h3 class="text-center">Thanks for you order, {{ user.profile.Name }}</h3>
             {% endif %}
