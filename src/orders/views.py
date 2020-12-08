@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 
 from .forms import ConfirmationForm
 from .models import ProductBasket, ProductOrder, Order
@@ -74,7 +75,7 @@ def confirmation(request):
                         basket_product = ProductBasket.objects.get(id=basket_prod_id)
                         product = basket_product.product
                         ProductOrder.objects.create(product=product, price=ProductBasket.price, order=order)
-
+                return redirect(reverse_lazy("products:thanks"))
 
             else:
                 print('no')
