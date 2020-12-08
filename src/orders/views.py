@@ -39,6 +39,7 @@ def basket_add(request):
         return_dict = dict()
     return JsonResponse(return_dict)
 
+
 def confirmation(request):
     try:
         return_dict = dict()
@@ -51,18 +52,22 @@ def confirmation(request):
         total_price = sum(product_prices)
         form = ConfirmationForm(request.POST or None)
         if request.POST:
-            print(request.POST)
+            print(f'Отправляю{request.POST}')
             if form.is_valid():
                 print('ok')
+
                 data=request.POST
                 phone = data.get('phone')
                 name = data.get('name')
                 message = data.get('message')
                 address=data.get('address')
-                user, created = User.objects.get_or_create(username=phone, defaults={'first_name': name})
-
-                order = Order.objects.create(user=user, customer_name=name, phone=phone, extra_message=message, customer_address=address)
-
+                if not request.user.is_authenticated:
+                    user, created = User.objects.get_or_create(username=phone, defaults={'first_name': name})
+                    order = Order.objects.create(user=user, customer_name=name, phone=phone, extra_message=message, customer_address=address)
+                else:
+                    user = request.user
+                    order = Order.objects.create(user=user, customer_name=name, phone=phone, extra_message=message,
+                                                 customer_address=address)
                 for name, value in data.items():
                     if name.startswith("product_in_basket_"):
                         basket_prod_id=name.split("product_in_basket_")[1]
@@ -74,5 +79,5 @@ def confirmation(request):
             else:
                 print('no')
     except:
-        return_dict = dict()
+        print(FileNotFoundError)
     return render(request, 'products/order_form.html', locals())

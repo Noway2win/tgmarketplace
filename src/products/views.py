@@ -20,3 +20,6 @@ class Detailed_Prod(DetailView):
             self.request.session.cycle_key()
 
         return session_key
+
+def gretting_view(request):
+    return render(request, 'products/regards_for_order.html')

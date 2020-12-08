@@ -15,6 +15,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = [field.name for field in Order._meta.fields]
     inlines = [ProductOrderInline]
     form = OrderForm
+    readonly_fields = ["user"]
 
 
 @admin.register(ProductOrder)

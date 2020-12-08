@@ -1,11 +1,11 @@
 from django.contrib import admin
-from .models import Profile
-from .forms import ProfileForm
 
-# Register your models here.
+from tgbot.models import Profile
 
 
 @admin.register(Profile)
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ("phone_number", "name", "product", "extra_message")
-    form = ProfileForm
+class OrderAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Profile._meta.fields]
+
+    class Meta:
+        model = Profile
