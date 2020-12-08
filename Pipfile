@@ -12,8 +12,8 @@ pillow = "*"
 whitenoise = "*"
 gunicorn = "*"
 django-heroku = "*"
-django-crispy-forms = "*"
 requests = "*"
+django-celery = "*"
 
 [dev-packages]
 black = "==20.8b1"
