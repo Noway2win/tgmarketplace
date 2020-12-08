@@ -1,6 +1,7 @@
-import requests
+
 import json
 
+import requests
 from celery.schedules import crontab
 from celery.task import periodic_task
 
@@ -11,3 +12,6 @@ def get_usd_price():
     json_dict = json_list[0]
     usd_price = json_dict['USD_in']
     return(usd_price)
+
+a = get_usd_price()
+print(a)
