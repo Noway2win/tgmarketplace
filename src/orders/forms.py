@@ -22,7 +22,7 @@ class ProductOrderForm(forms.ModelForm):
 
 
 class ConfirmationForm(forms.Form):
-    name = forms.CharField(required=True)
+    name = forms.CharField(required=False)
     phone_regex = RegexValidator(
         regex=r"^\+?1?\d{9,15}$",
         message="Phone number must be entered in the format: '+************'. Up to 15 digits allowed.",
@@ -30,5 +30,5 @@ class ConfirmationForm(forms.Form):
     phone = forms.CharField(
         validators=[phone_regex], max_length=17
     )  # validators should be a list
-    address = forms.CharField(required=True)
+    address = forms.CharField(required=False)
     message = forms.CharField(required=False)
