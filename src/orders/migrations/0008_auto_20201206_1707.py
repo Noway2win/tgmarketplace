@@ -7,17 +7,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('orders', '0007_productbasket_session_key'),
+        ("orders", "0007_productbasket_session_key"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='order',
-            name='phone_number',
+            model_name="order",
+            name="phone_number",
         ),
         migrations.AddField(
-            model_name='order',
-            name='phone',
-            field=models.CharField(blank=True, max_length=17, validators=[django.core.validators.RegexValidator(message="Phone number must be entered in the format: '+************'. Up to 15 digits allowed.", regex='^\\+?1?\\d{9,15}$')]),
+            model_name="order",
+            name="phone",
+            field=models.CharField(
+                blank=True,
+                max_length=17,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        message="Phone number must be entered in the format: '+************'. Up to 15 digits allowed.",
+                        regex="^\\+?1?\\d{9,15}$",
+                    )
+                ],
+            ),
         ),
     ]

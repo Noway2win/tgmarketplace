@@ -39,46 +39,88 @@ def basket_add(request):
         return_dict = dict()
     return JsonResponse(return_dict)
 
+# def confirmation(request):
+#     return_dict = dict()
+#     session_key = request.session.session_key
+#     products_in_basket= ProductBasket.objects.filter(session_key=session_key, is_active=True)
+#     product_prices = list()
+#     for item in products_in_basket:
+#         product_prices.append(item.product.product_price)
+#
+#     total_price = sum(product_prices)
+#     form = ConfirmationForm(request.POST or None)
+#     if request.POST:
+#         print(request.POST)
+#         if form.is_valid():
+#             print('ok')
+#             data=request.POST
+#             user = request.user
+#             name = data.get('name')
+#             message = data.get('message')
+#             address=data.get('address')
+#             phone = data.get('phone')
+#         # ПОЛЬЗОВАТЕЛЬ
+# #                .
+# #             .
+# #             .
+# # .
+#
+#             if not request.user.is_authenticated:
+#                 user, created = User.objects.get_or_create(username=phone, defaults={'first_name': name})
+#
+#
+#             order = Order.objects.create(user=user, customer_name=name, phone=phone, extra_message=message, customer_address=address)
+#
+#             for name, value in data.items():
+#                 if name.startswith("product_in_basket_"):
+#                     basket_prod_id=name.split("product_in_basket_")[1]
+#                     basket_product = ProductBasket.objects.get(id=basket_prod_id)
+#                     product = basket_product.product
+#                     ProductOrder.objects.create(product=product, price=ProductBasket.price, order=order)
+#
+#
+#         else:
+#             print('no')
+#     return render(request, 'products/order_form.html', locals())
+
 def confirmation(request):
-    return_dict = dict()
-    session_key = request.session.session_key
-    products_in_basket= ProductBasket.objects.filter(session_key=session_key, is_active=True)
-    product_prices = list()
-    for item in products_in_basket:
-        product_prices.append(item.product.product_price)
+    try:
+        return_dict = dict()
+        session_key = request.session.session_key
+        products_in_basket= ProductBasket.objects.filter(session_key=session_key, is_active=True)
+        product_prices = list()
+        for item in products_in_basket:
+            product_prices.append(item.product.product_price)
 
-    total_price = sum(product_prices)
-    form = ConfirmationForm(request.POST or None)
-    if request.POST:
-        print(request.POST)
-        if form.is_valid():
-            print('ok')
-            data=request.POST
-            user = request.user
-            name = data.get('name')
-            message = data.get('message')
-            address=data.get('address')
-            phone = data.get('phone')
-        # ПОЛЬЗОВАТЕЛЬ
-#                .
-#             .
-#             .
-# .
+        total_price = sum(product_prices)
+        form = ConfirmationForm(request.POST or None)
+        if request.POST:
+            print(request.POST)
+            if form.is_valid():
+                print('ok')
 
-            if not request.user.is_authenticated:
-                user, created = User.objects.get_or_create(username=phone, defaults={'first_name': name})
-
-
-            order = Order.objects.create(user=user, customer_name=name, phone=phone, extra_message=message, customer_address=address)
-
-            for name, value in data.items():
-                if name.startswith("product_in_basket_"):
-                    basket_prod_id=name.split("product_in_basket_")[1]
-                    basket_product = ProductBasket.objects.get(id=basket_prod_id)
-                    product = basket_product.product
-                    ProductOrder.objects.create(product=product, price=ProductBasket.price, order=order)
+                data=request.POST
+                phone = data.get('phone')
+                name = data.get('name')
+                message = data.get('message')
+                address=data.get('address')
+                if not request.user.is_authenticated:
+                    user, created = User.objects.get_or_create(username=phone, defaults={'first_name': name})
+                    order = Order.objects.create(user=user, customer_name=name, phone=phone, extra_message=message, customer_address=address)
+                else:
+                    user = request.user
+                    order = Order.objects.create(user=user, customer_name=name, phone=phone, extra_message=message,
+                                                 customer_address=address)
+                for name, value in data.items():
+                    if name.startswith("product_in_basket_"):
+                        basket_prod_id=name.split("product_in_basket_")[1]
+                        basket_product = ProductBasket.objects.get(id=basket_prod_id)
+                        product = basket_product.product
+                        ProductOrder.objects.create(product=product, price=ProductBasket.price, order=order)
 
 
-        else:
-            print('no')
+            else:
+                print('no')
+    except:
+        return_dict = dict()
     return render(request, 'products/order_form.html', locals())

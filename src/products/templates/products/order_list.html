@@ -2,7 +2,22 @@
 {% block title %}Order History{% endblock %}
 {% block body %}
     <h1>Order_history</h1>
+    <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
                    {% for obj in object_list %}
-                       <p>{{ obj.product.product_name }}</p>
+ <table class="table table-striped">
+  <tbody>
+    <tr>
+      <td>{{ obj.product.product_name }}</td>
+      <td>{{ obj.product.product_price }} BYN</td>
+      <td>{{ obj.created }}</td>
+    </tr>
+  </tbody>
+</table>
                    {% endfor %}
 {% endblock %}

@@ -14,6 +14,7 @@ from pathlib import Path
 from dynaconf import settings as _ds
 
 import django_heroku
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 import dj_database_url
 
@@ -32,7 +33,11 @@ SECRET_KEY = _ds.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = _ds.DEBUG
 
-ALLOWED_HOSTS = _ds.ALLOWED_HOSTS + ['telegrammarket.herokuapp.com', "localhost", "127.0.0.1",]
+ALLOWED_HOSTS = _ds.ALLOWED_HOSTS + [
+    "telegrammarket.herokuapp.com",
+    "localhost",
+    "127.0.0.1",
+]
 
 
 # Application definition
@@ -85,7 +90,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 WSGI_APPLICATION = "tgmarket.wsgi.application"
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = "/"
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -144,4 +149,4 @@ if not DEBUG:
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Read more at https://dynaconf.readthedocs.io/en/latest/guides/django.html
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

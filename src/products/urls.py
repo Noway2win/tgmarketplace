@@ -14,5 +14,4 @@ urlpatterns = [
     path("basket_add/", basket_add, name="basket"),
     path("confirmation/", confirmation, name="confirmation"),
     path("thanks/", gretting_view, name="thanks"),
-
 ]

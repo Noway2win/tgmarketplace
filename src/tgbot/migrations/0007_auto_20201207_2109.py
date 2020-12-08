@@ -10,45 +10,62 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('tgbot', '0006_remove_profile_purchase'),
+        ("tgbot", "0006_remove_profile_purchase"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='profile',
-            name='extra_message',
+            model_name="profile",
+            name="extra_message",
         ),
         migrations.RemoveField(
-            model_name='profile',
-            name='name',
+            model_name="profile",
+            name="name",
         ),
         migrations.RemoveField(
-            model_name='profile',
-            name='phone_number',
+            model_name="profile",
+            name="phone_number",
         ),
         migrations.RemoveField(
-            model_name='profile',
-            name='product',
+            model_name="profile",
+            name="product",
         ),
         migrations.AddField(
-            model_name='profile',
-            name='Address',
-            field=models.CharField(blank=True, default=None, max_length=128, null=True, verbose_name='Customer address'),
+            model_name="profile",
+            name="Address",
+            field=models.CharField(
+                blank=True,
+                default=None,
+                max_length=128,
+                null=True,
+                verbose_name="Customer address",
+            ),
         ),
         migrations.AddField(
-            model_name='profile',
-            name='Name',
-            field=models.CharField(default='', max_length=128),
+            model_name="profile",
+            name="Name",
+            field=models.CharField(default="", max_length=128),
         ),
         migrations.AddField(
-            model_name='profile',
-            name='Phone',
-            field=models.CharField(blank=True, max_length=17, validators=[django.core.validators.RegexValidator(message="Phone number must be entered in the format: '+************'. Up to 15 digits allowed.", regex='^\\+?1?\\d{9,15}$')]),
+            model_name="profile",
+            name="Phone",
+            field=models.CharField(
+                blank=True,
+                max_length=17,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        message="Phone number must be entered in the format: '+************'. Up to 15 digits allowed.",
+                        regex="^\\+?1?\\d{9,15}$",
+                    )
+                ],
+            ),
         ),
         migrations.AddField(
-            model_name='profile',
-            name='user',
-            field=models.OneToOneField(default=0, on_delete=django.db.models.deletion.CASCADE, to='auth.user'),
+            model_name="profile",
+            name="user",
+            field=models.OneToOneField(
+                default=0, on_delete=django.db.models.deletion.CASCADE, to="auth.user"
+            ),
             preserve_default=False,
         ),
     ]
