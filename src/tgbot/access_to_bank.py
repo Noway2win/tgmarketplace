@@ -12,6 +12,3 @@ def get_usd_price():
     json_dict = json_list[0]
     usd_price = json_dict['USD_in']
     return(usd_price)
-
-a = get_usd_price()
-print(a)
