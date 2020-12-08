@@ -21,7 +21,7 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(ProductOrder)
 class ProductOrderAdmin(admin.ModelAdmin):
     list_display = [field.name for field in ProductOrder._meta.fields]
-
+    readonly_fields = ["price"]
     class Meta:
         model = ProductOrder
 

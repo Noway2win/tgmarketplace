@@ -1,9 +1,12 @@
+from decimal import Decimal
+
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.db import models
 
 # Create your models here.
 from products.models import Product
+from tgbot.access_to_bank import get_usd_price
 
 
 class Order(models.Model):
@@ -48,7 +51,7 @@ class ProductOrder(models.Model):
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
     price = models.DecimalField(
-        default=0, verbose_name="price in order", max_digits=5, decimal_places=2
+        default=0, verbose_name="price in order", max_digits=10, decimal_places=4
     )
     is_active = models.BooleanField(default=True)
 
@@ -58,7 +61,9 @@ class ProductOrder(models.Model):
 
     def save(self, *args, **kwargs):
         product_price = self.product.product_price
-        self.price = product_price  # * self.
+        usd_price = get_usd_price()
+        usd_price_decimal = Decimal(usd_price.replace(',', '.'))
+        self.price = product_price * usd_price_decimal# * self.
         # self.price.save(force_update=True)
         super(ProductOrder, self).save(*args, **kwargs)
 
@@ -74,7 +79,7 @@ class ProductBasket(models.Model):
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
     price = models.DecimalField(
-        default=0, verbose_name="price in order", max_digits=5, decimal_places=2
+        default=0, verbose_name="price in order", max_digits=10, decimal_places=4
     )
     is_active = models.BooleanField(default=True)
 
@@ -87,6 +92,8 @@ class ProductBasket(models.Model):
 
     def save(self, *args, **kwargs):
         product_price = self.product.product_price
-        self.price = product_price  # * self.
+        usd_price = get_usd_price()
+        usd_price_decimal = Decimal(usd_price.replace(',', '.'))
+        self.price = product_price * usd_price_decimal# * self.
         # self.price.save(force_update=True)
         super(ProductBasket, self).save(*args, **kwargs)
