@@ -8,9 +8,11 @@
         <div class="row">
             <div class="col-lg-12">
                  {% if  user.profile is None  %}
-                <h3 class="text-center">Thanks for you order, Stranger</h3>
-                {% else %}
-                 <h3 class="text-center">Thanks for you order, {{ user.profile.Name }}</h3>
+                    <h3 class="text-center">Thanks for you order, Stranger</h3>
+                {% elif user.profile.Name is None %}
+                    <h3 class="text-center">Thanks for you order, {{ user.profile.Name }}</h3>
+                 {% else %}
+                    <h3 class="text-center">Thanks for you order, {{ user.profile.Name }}</h3>
             {% endif %}
                 <h5 class="text-center">Total price: {{ total_price }} BYN</h5>
                 <form class="form-horizontal" method="post">{% csrf_token %}
