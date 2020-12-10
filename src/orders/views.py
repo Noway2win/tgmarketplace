@@ -15,11 +15,13 @@ def basket_add(request):
         data = request.POST
         product_id = data.get("product_id")
         is_delete = data.get("is_delete")
-        if is_delete == 'true':
+        if is_delete == "true":
             ProductBasket.objects.filter(id=product_id).update(is_active=False)
         else:
             new_product, created = ProductBasket.objects.update_or_create(
-                session_key=session_key, product_id=product_id, is_active=True,
+                session_key=session_key,
+                product_id=product_id,
+                is_active=True,
             )
 
         basket_products = ProductBasket.objects.filter(
@@ -45,7 +47,9 @@ def confirmation(request):
     try:
         return_dict = dict()
         session_key = request.session.session_key
-        products_in_basket= ProductBasket.objects.filter(session_key=session_key, is_active=True)
+        products_in_basket = ProductBasket.objects.filter(
+            session_key=session_key, is_active=True
+        )
         product_prices = list()
         for item in products_in_basket:
             product_prices.append(item.product.product_price)
@@ -53,32 +57,47 @@ def confirmation(request):
         total_price = sum(product_prices)
         form = ConfirmationForm(request.POST or None)
         if request.POST:
-            print(f'Отправляю{request.POST}')
+            print(f"Отправляю{request.POST}")
             if form.is_valid():
-                print('ok')
+                print("ok")
 
-                data=request.POST
-                phone = data.get('phone')
-                name = data.get('name')
-                message = data.get('message')
-                address=data.get('address')
+                data = request.POST
+                phone = data.get("phone")
+                name = data.get("name")
+                message = data.get("message")
+                address = data.get("address")
                 if not request.user.is_authenticated:
-                    user, created = User.objects.get_or_create(username=phone, defaults={'first_name': name})
-                    order = Order.objects.create(user=user, customer_name=name, phone=phone, extra_message=message, customer_address=address)
+                    user, created = User.objects.get_or_create(
+                        username=phone, defaults={"first_name": name}
+                    )
+                    order = Order.objects.create(
+                        user=user,
+                        customer_name=name,
+                        phone=phone,
+                        extra_message=message,
+                        customer_address=address,
+                    )
                 else:
                     user = request.user
-                    order = Order.objects.create(user=user, customer_name=name, phone=phone, extra_message=message,
-                                                 customer_address=address)
+                    order = Order.objects.create(
+                        user=user,
+                        customer_name=name,
+                        phone=phone,
+                        extra_message=message,
+                        customer_address=address,
+                    )
                 for name, value in data.items():
                     if name.startswith("product_in_basket_"):
-                        basket_prod_id=name.split("product_in_basket_")[1]
+                        basket_prod_id = name.split("product_in_basket_")[1]
                         basket_product = ProductBasket.objects.get(id=basket_prod_id)
                         product = basket_product.product
-                        ProductOrder.objects.create(product=product, price=ProductBasket.price, order=order)
+                        ProductOrder.objects.create(
+                            product=product, price=ProductBasket.price, order=order
+                        )
                 return redirect(reverse_lazy("products:thanks"))
 
             else:
-                print('no')
+                print("no")
     except:
         print(FileNotFoundError)
-    return render(request, 'products/order_form.html', locals())
+    return render(request, "products/order_form.html", locals())

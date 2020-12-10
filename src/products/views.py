@@ -21,5 +21,6 @@ class Detailed_Prod(DetailView):
 
         return session_key
 
+
 def gretting_view(request):
-    return render(request, 'products/regards_for_order.html')
+    return render(request, "products/regards_for_order.html")

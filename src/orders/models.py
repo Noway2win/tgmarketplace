@@ -62,8 +62,8 @@ class ProductOrder(models.Model):
     def save(self, *args, **kwargs):
         product_price = self.product.product_price
         usd_price = get_usd_price()
-        usd_price_decimal = Decimal(usd_price.replace(',', '.'))
-        self.price = product_price * usd_price_decimal# * self.
+        usd_price_decimal = Decimal(usd_price.replace(",", "."))
+        self.price = product_price * usd_price_decimal  # * self.
         # self.price.save(force_update=True)
         super(ProductOrder, self).save(*args, **kwargs)
 
@@ -93,7 +93,7 @@ class ProductBasket(models.Model):
     def save(self, *args, **kwargs):
         product_price = self.product.product_price
         usd_price = get_usd_price()
-        usd_price_decimal = Decimal(usd_price.replace(',', '.'))
-        self.price = product_price * usd_price_decimal# * self.
+        usd_price_decimal = Decimal(usd_price.replace(",", "."))
+        self.price = product_price * usd_price_decimal  # * self.
         # self.price.save(force_update=True)
         super(ProductBasket, self).save(*args, **kwargs)
